@@ -1,4 +1,3 @@
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -7,7 +6,6 @@ public class Definition {
 
   private String mText;
   private int mId;
-
 
   public Definition(String text) {
     mText = text;
@@ -19,7 +17,6 @@ public class Definition {
     return mText;
   }
 
-
   public static ArrayList<Definition> all() {
     return instances;
   }
@@ -27,21 +24,17 @@ public class Definition {
   public int getId() {
     return mId;
   }
-  //
-  // public void completeDefinition() {
-  //   mCompleted = true;
-  // }
-  //
-  // public static Definition find(int id) {
-  //   try {
-  //         return instances.get(id - 1);
-  //   } catch(IndexOutOfBoundsException e) {
-  //     return null;
-  //   }
-  // }
-  //
-  // public static void clear() {
-  //   instances.clear();
-  // }
+
+ public static Definition find(int id) {
+   try {
+     return instances.get(id - 1);
+   } catch (IndexOutOfBoundsException e) {
+     return null;
+   }
+ }
+
+  public static void clear() {
+    instances.clear();
+  }
 
 }

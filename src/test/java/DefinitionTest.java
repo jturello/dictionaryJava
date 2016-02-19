@@ -20,8 +20,6 @@ public class DefinitionTest {
     assertEquals("This is a definition", myDefinition.getText());
   }
 
-
-
   @Test
   public void all_returnsAllInstancesOfDefinition_true() {
     Definition firstDefinition = new Definition("First definition");
@@ -35,24 +33,24 @@ public class DefinitionTest {
     Definition myDefinition = new Definition("This is a definition");
     assertEquals(Definition.all().size(), myDefinition.getId());
   }
-  //
-  // @Test
-  // public void find_returnsDefinitionWithSameId_secondDefinition() {
-  //   Definition firstDefinition = new Definition("Mow the lawn");
-  //   Definition secondDefinition = new Definition("Buy groceries");
-  //   assertEquals(Definition.find(secondDefinition.getId()), secondDefinition);
-  // }
-  //
-  // @Test
-  // public void find_returnsNullWhenNoDefinitionFound_true() {
-  //   assertTrue(Definition.find(999) == null);
-  // }
-  //
-  // @Test
-  // public void clear_emptiesAllDefinitionsFromArrayList() {
-  //   Definition myDefinition = new Definition("Mow the lawn");
-  //   Definition.clear();
-  //   assertEquals(Definition.all().size(), 0);
-  // }
+
+  @Test
+  public void find_returnsDefinitionWithSameId_secondDefinition() {
+    Definition firstDefinition = new Definition("Definition one");
+    Definition secondDefinition = new Definition("Definition two");
+    assertEquals(Definition.find(secondDefinition.getId()), secondDefinition);
+  }
+
+  @Test
+  public void find_returnsNullWhenNoDefinitionFound_true() {
+    assertTrue(Definition.find(999) == null);
+  }
+
+  @Test
+  public void clear_emptiesAllDefinitionsFromArrayList() {
+    Definition myDefinition = new Definition("Mow the lawn");
+    Definition.clear();
+    assertEquals(Definition.all().size(), 0);
+  }
 
 }
