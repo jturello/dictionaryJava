@@ -21,7 +21,7 @@ public class WordTest {
   }
 
   @Test
-  public void getDefinitions_instantiatesWithNoDefinitions_true() {
+  public void getDefinitions_instantiatesWordWithNoDefinitions_true() {
     Word myWord = new Word("Prestidigitate");
     assertEquals(0, myWord.getDefinitions().size());
   }
