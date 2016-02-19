@@ -10,11 +10,15 @@ public class Word {
   public Word(String string) {
     mText = string;
     instances.add(this);
-
   }
 
   public String getText() {
     return mText;
+  }
+
+  public boolean addDefinition(String definition) {
+    Definition newDefinition = new Definition(definition);
+    return definitions.add(newDefinition);
   }
 
   public ArrayList<Definition> getDefinitions() {
@@ -26,7 +30,6 @@ public class Word {
   }
 
   public static void clear() {
-
     instances.clear();
   }
 

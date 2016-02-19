@@ -42,6 +42,19 @@ public class WordTest {
     assertEquals(Word.all().size(), 0);
   }
 
+  @Test
+  public void addDefinition_addsDefinitionsToWord_true() {
+    Word myWord = new Word("newWord");
+    myWord.addDefinition("This is newWord's first definition");
+  }
+
+  @Test
+  public void word_canHaveMoreThanOneDefinition_true() {
+    Word myWord = new Word("newWord");
+    myWord.addDefinition("First definition");
+    myWord.addDefinition("Second definition");
+    assertEquals(2, myWord.getDefinitions().size());
+  }
   // @Test
   // public void getId_WordsInstantiatedWithAnID_true() {
   //   Word myWord = new Word("Mow the lawn");
