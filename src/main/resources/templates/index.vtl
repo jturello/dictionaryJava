@@ -1,0 +1,11 @@
+<h1>Todo list!</h1>
+
+<ul>
+#foreach ($task in $tasks)
+  <li>$task.getDescription()</li>
+#end
+</ul>
+
+<hr/>
+
+<a href="/tasks/new">Add a new task</a>
