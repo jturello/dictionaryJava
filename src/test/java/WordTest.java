@@ -8,29 +8,23 @@ public class WordTest {
   @Rule
   public ClearRule clearRule = new ClearRule();
 
-  // @Test
-  // public void Word_instantiatesCorrectly_true() {
-  //   Word myWord = new Word("Mow the lawn");
-  //   assertEquals(true, myWord instanceof Word);
-  // }
-  //
-  // @Test
-  // public void Word_instantiatesWithDescription_true() {
-  //   Word myWord = new Word("Mow the lawn");
-  //   assertEquals("Mow the lawn", myWord.getDescription());
-  // }
-  //
-  // @Test
-  // public void isComplete_isFalseAfterInstantion_false() {
-  //   Word myWord = new Word("Mow the lawn");
-  //   assertEquals(false, myWord.isCompleted());
-  // }
-  //
-  // @Test
-  // public void getCreateAt_instantiatesWithCurrentTime_today() {
-  //   Word myWord = new Word("Mow the lawn");
-  //   assertEquals(LocalDateTime.now().getDayOfWeek(), myWord.getCreateAt().getDayOfWeek());
-  // }
+  @Test
+  public void Word_instantiatesCorrectly_true() {
+    Word myWord = new Word("Object");
+    assertEquals(true, myWord instanceof Word);
+  }
+
+  @Test
+  public void Word_instantiatesWithText_true() {
+    Word myWord = new Word("Object");
+    assertEquals("Object", myWord.getText());
+  }
+
+  @Test
+  public void getDefinitions_instantiatesWithNoDefinitions_true() {
+    Word myWord = new Word("Prestidigitate");
+    assertEquals(0, myWord.getDefinitions().size());
+  }
   //
   // @Test
   // public void all_returnsAllInstancesOfWord_true() {
