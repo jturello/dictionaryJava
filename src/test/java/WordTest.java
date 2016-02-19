@@ -55,6 +55,20 @@ public class WordTest {
     myWord.addDefinition("Second definition");
     assertEquals(2, myWord.getDefinitions().size());
   }
+
+  @Test
+  public void getId_wordsInstantiatedWithAnID_true() {
+    Word myWord = new Word("soggy");
+    assertEquals(Word.all().size(), myWord.getId());
+  }
+
+  // @Test
+  // public void find_returnsDefinitionWithSameId_secondDefinition() {
+  //   Definition firstDefinition = new Definition("Definition one");
+  //   Definition secondDefinition = new Definition("Definition two");
+  //   assertEquals(Definition.find(secondDefinition.getId()), secondDefinition);
+  // }
+
   // @Test
   // public void getId_WordsInstantiatedWithAnID_true() {
   //   Word myWord = new Word("Mow the lawn");

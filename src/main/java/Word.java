@@ -10,10 +10,15 @@ public class Word {
   public Word(String string) {
     mText = string;
     instances.add(this);
+    mId = instances.size();
   }
 
   public String getText() {
     return mText;
+  }
+
+  public int getId() {
+    return mId;
   }
 
   public boolean addDefinition(String definition) {
@@ -27,6 +32,14 @@ public class Word {
 
   public static ArrayList<Word> all() {
     return instances;
+  }
+
+  public static Word find(int id) {
+    try {
+      return instances.get(id - 1);
+    } catch (IndexOutOfBoundsException e) {
+      return null;
+    }
   }
 
   public static void clear() {

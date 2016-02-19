@@ -9,62 +9,68 @@ public class App {
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
 
-  //   get("/", (request, response) -> {
-  //     HashMap<String, Object> model = new HashMap<String, Object>();
+    get("/", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      model.put("words", request.session().attribute("words"));
+      model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
+    get("words/new", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      model.put("template", "templates/word-form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
+
+    get("/words/:id", (request, repsonse) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      Word word = Word.find(Integer.parseInt(request.params(":id")));
+
+      model.put("word", word);
+      model.put("template", "templates/word.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
+
+    // get("/tasks", (request, response) -> {
+    //   HashMap<String, Object> model = new HashMap<String, Object>();
+    //   model.put("tasks", Task.all());
+    //   model.put("template", "templates/tasks.vtl");
+    //   return new ModelAndView(model, layout);
+    // }, new VelocityTemplateEngine());
+
   //
-  //     model.put("tasks", request.session().attribute("tasks"));
-  //     model.put("template", "templates/index.vtl");
-  //     return new ModelAndView(model, layout);
-  //   }, new VelocityTemplateEngine());
-  //
-  //   get("/tasks", (request, response) -> {
-  //     HashMap<String, Object> model = new HashMap<String, Object>();
-  //     model.put("tasks", Task.all());
-  //     model.put("template", "templates/tasks.vtl");
-  //     return new ModelAndView(model, layout);
-  //   }, new VelocityTemplateEngine());
-  //
-  //   get("tasks/new", (request, response) -> {
-  //     HashMap<String, Object> model = new HashMap<String, Object>();
-  //
-  //     model.put("template", "templates/task-form.vtl");
-  //     return new ModelAndView(model, layout);
-  //   }, new VelocityTemplateEngine());
-  //
-  //   get("/tasks/:id", (request, repsonse) -> {
-  //     HashMap<String, Object> model = new HashMap<String, Object>();
-  //
-  //     Task task = Task.find(Integer.parseInt(request.params(":id")));
-  //
-  //     model.put("task", task);
-  //     model.put("template", "templates/task.vtl");
-  //     return new ModelAndView(model, layout);
-  //   }, new VelocityTemplateEngine());
-  //
-  //
-  //   post("/tasks", (request, response) -> {
-  //     HashMap<String, Object> model = new HashMap<String, Object>();
-  //
-  //     ArrayList<Task> tasks = request.session().attribute("tasks");
-  //
-  //     if (tasks == null) {
-  //       tasks = new ArrayList<Task>();
-  //       request.session().attribute("tasks", tasks);
-  //     }
-  //
-  //     String description = request.queryParams("description");
-  //     if (description.length() > 0) {
-  //       Task newTask = new Task(description);
-  //       tasks.add(newTask);
-  //       model.put("successFailMessage", "Your task has been saved.");
-  //     } else {
-  //       model.put("successFailMessage", "No entry made. Please try again.");
-  //     }
-  //
-  //     model.put("template", "templates/success.vtl");
-  //     return new ModelAndView(model, layout);
-  //   }, new VelocityTemplateEngine());
-  //
+
+    post("/words", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      ArrayList<Word> words = request.session().attribute("words");
+
+      if (words == null) {
+        words = new ArrayList<Word>();
+        request.session().attribute("words", words);
+      }
+
+      String wordText = request.queryParams("newWord");
+      if (wordText.length() > 0) {
+        Word newWord = new Word(wordText);
+        words.add(newWord);
+        model.put("successFailMessage", "Your entry has been saved.");
+      } else {
+        model.put("successFailMessage", "No entry made. Please try again.");
+      }
+
+      model.put("template", "templates/success.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
   }
 
 }
