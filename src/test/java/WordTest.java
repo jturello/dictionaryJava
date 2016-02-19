@@ -25,17 +25,25 @@ public class WordTest {
     Word myWord = new Word("Prestidigitate");
     assertEquals(0, myWord.getDefinitions().size());
   }
-  //
+
+  @Test
+  public void all_returnsAllInstancesOfWord_true() {
+    Word firstWord = new Word("Interlocutor");
+    Word secondWord = new Word("baggle");
+    assertTrue(Word.all().contains(firstWord));
+    assertTrue(Word.all().contains(secondWord));
+  }
+
+
+  @Test
+  public void clear_emptiesAllWordsFromArrayList() {
+    Word myWord = new Word("Elemental");
+    Word.clear();
+    assertEquals(Word.all().size(), 0);
+  }
+
   // @Test
-  // public void all_returnsAllInstancesOfWord_true() {
-  //   Word firstWord = new Word("Mow the lawn");
-  //   Word secondWord = new Word("Buy groceries");
-  //   assertTrue(Word.all().contains(firstWord));
-  //   assertTrue(Word.all().contains(secondWord));
-  // }
-  //
-  // @Test
-  // public void newId_WordsInstantiatedWithAnID_true() {
+  // public void getId_WordsInstantiatedWithAnID_true() {
   //   Word myWord = new Word("Mow the lawn");
   //   assertEquals(Word.all().size(), myWord.getId());
   // }
@@ -52,11 +60,6 @@ public class WordTest {
   //   assertTrue(Word.find(999) == null);
   // }
   //
-  // @Test
-  // public void clear_emptiesAllWordsFromArrayList() {
-  //   Word myWord = new Word("Mow the lawn");
-  //   Word.clear();
-  //   assertEquals(Word.all().size(), 0);
-  // }
+
 
 }

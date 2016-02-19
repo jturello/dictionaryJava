@@ -7,8 +7,9 @@ public class Word {
 
   private  String mText;
 
-  public Word(String str) {
-    mText = str;
+  public Word(String string) {
+    mText = string;
+    instances.add(this);
 
   }
 
@@ -18,6 +19,15 @@ public class Word {
 
   public ArrayList<Definition> getDefinitions() {
     return definitions;
+  }
+
+  public static ArrayList<Word> all() {
+    return instances;
+  }
+
+  public static void clear() {
+
+    instances.clear();
   }
 
 }
