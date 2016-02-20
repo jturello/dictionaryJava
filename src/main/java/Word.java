@@ -6,6 +6,7 @@ public class Word {
   private ArrayList<Definition> definitions = new ArrayList<Definition>();
 
   private  String mText;
+  private int mId;
 
   public Word(String string) {
     mText = string;
