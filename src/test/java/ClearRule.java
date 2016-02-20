@@ -4,7 +4,7 @@ public class ClearRule extends ExternalResource {
   protected void before() {}
 
   protected void after() {
-    // Definition.clear();
-    // Word.clear();
+    Definition.clear();
+    Word.clear();
   }
 }
