@@ -5,18 +5,16 @@
   </hr>
 #end
 
+</br>
+
+<a href="/">Return to Main Page</a>
+<a href="/words/$word.getId()/defintions/new">Add a definition</a>
+
+</hr>
+
 
 #foreach ($definition in $word.getDefinitions())
   <ul>
     <li> <h4>$definition.getText()</h4> </li>
   </ul>
 #end
-
-
-</hr>
-
-<a href="/words/$word.getId()/defintions/new">Add a definition</a>
-
-<!-- <a href="/words/new">Add another word</a> -->
-</br>
-<a href="/">Return to Main Page</a>

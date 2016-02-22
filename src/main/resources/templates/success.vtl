@@ -1,6 +1,12 @@
 <h2>Result:</h2>
 <h2>$successFailMessage</h2>
 
+#if($word)
+  <h4>Your word has been saved!</h4>
+elseif($definition)
+  <h4>Your definition has been saved!</h4>
+#end
+
 <a href="/words">View word list</a>
 <br/>
 <a href="/words/new">Add a word</a>

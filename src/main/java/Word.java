@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 
 public class Word {
-  private static ArrayList<Word> instances = new ArrayList<Word>();
-  private ArrayList<Definition> definitions = new ArrayList<Definition>();
+  private static ArrayList<Word> instances = new ArrayList<Word>();;
+  private ArrayList<Definition> definitions;
 
   private  String mText;
   private int mId;
@@ -12,6 +12,7 @@ public class Word {
     mText = string;
     instances.add(this);
     mId = instances.size();
+    definitions = new ArrayList<Definition>();
   }
 
   public String getText() {
