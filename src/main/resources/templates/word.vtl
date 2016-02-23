@@ -1,20 +1,15 @@
-#if ($word)
-  <h1>$word.getText()</h1>
-#else
-  <h1>No definitions found</h1>
-  </hr>
-#end
-
-</br>
-
-<a href="/">Return to Main Page</a>
-<a href="/words/$word.getId()/defintions/new">Add a definition</a>
+<h3>These are the definitions for word $word.getText()</h3>
 
 </hr>
 
-
-#foreach ($definition in $word.getDefinitions())
+#foreach ($definition in $definitions)
   <ul>
     <li> <h4>$definition.getText()</h4> </li>
   </ul>
 #end
+
+</hr>
+
+<a href="/words">Return to Word List</a>
+</br>
+<a href="/words/$word.getId()/defintions/new">Add a definition</a>

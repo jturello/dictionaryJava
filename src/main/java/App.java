@@ -13,7 +13,7 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
 
       model.put("words", request.session().attribute("words"));
-      model.put("template", "templates/index.vtl");
+      model.put("template", "templates/words.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -30,8 +30,15 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
 
       Word word = Word.find(Integer.parseInt(request.params(":id")));
+      ArrayList<Definition> definitions = word.getDefinitions();
+
+      if (definitions == null) {
+        definitions = new ArrayList<Definition>();
+        request.session().attribute("definitions", definitions);
+      }
 
       model.put("word", word);
+      model.put("definitions", definitions);
       model.put("template", "templates/word.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -55,68 +62,82 @@ public class App {
         request.session().attribute("words", words);
       }
 
-      String wordText = request.queryParams("newWord");
-      if (wordText.length() > 0) {
-        Word newWord = new Word(wordText);
-        words.add(newWord);
-        model.put("word", newWord);
-        model.put("successFailMessage", "Your entry has been saved.");
-      } else {
-        model.put("successFailMessage", "No entry made. Please try again.");
-      }
+      String wordText = request.queryParams("word");
 
-      model.put("template", "templates/success.vtl");
+      Word newWord = new Word(wordText);
+      words.add(newWord);
+      request.session().attribute("words", words);
+
+      model.put("words", words);
+      model.put("template", "templates/words.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
 
-//*********************************************
+    get("/words/:id/definitions/new", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
 
-get("words/:id/definitions/new", (request, response) -> {
-  HashMap<String, Object> model = new HashMap<String, Object>();
+      Word word = Word.find(Integer.parseInt(request.params(":id")));
+      ArrayList<Definition> definitions = word.getDefinitions();
 
-  model.put("template", "templates/word-definitions-form.vtl");
-  return new ModelAndView(model, layout);
-}, new VelocityTemplateEngine());
+      if (definitions == null) {
+        definitions = new ArrayList<Definition>();
+        request.session().attribute("definitions", definitions);
+      }
 
-
-get("/definitions/:id", (request, repsonse) -> {
-  HashMap<String, Object> model = new HashMap<String, Object>();
-
-  Word word = Word.find(Integer.parseInt(request.params(":id")));
-
-  model.put("word", word);
-  model.put("template", "templates/word.vtl");
-  return new ModelAndView(model, layout);
-}, new VelocityTemplateEngine());
+      model.put("word", word);
+      model.put("definitions", definitions);
+      model.put("template", "templates/word-definitions-form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
 
-get("/definitions", (request, response) -> {
-  HashMap<String, Object> model = new HashMap<String, Object>();
-  model.put("definitions", Definition.all());
-  model.put("template", "templates/definitions.vtl");
-  return new ModelAndView(model, layout);
-}, new VelocityTemplateEngine());
+    get("/definitions/:id", (request, repsonse) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      Word word = Word.find(Integer.parseInt(request.params(":id")));
+
+      model.put("word", word);
+      model.put("template", "templates/word.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
 
-post("/definitions", (request, response) -> {
-  HashMap<String, Object> model = new HashMap<String, Object>();
+    get("/definitions", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
 
-  model.put("definition", Definition.find(Integer.parseInt("definition"))));
 
-  String wordText = request.params("newWord");
-  if (wordText.length() > 0) {
-    Word newWord = new Word(wordText);
-    words.add(newWord);
-    model.put("word", newWord);
-    model.put("successFailMessage", "Your entry has been saved.");
-  } else {
-    model.put("successFailMessage", "No entry made. Please try again.");
-  }
+      model.put("definitions", Definition.all());
+      model.put("template", "templates/definitions.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
-  model.put("template", "templates/success.vtl");
-  return new ModelAndView(model, layout);
-}, new VelocityTemplateEngine());
+
+    post("/definitions", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      // model.put("definition", Definition.find(Integer.parseInt("definition")));
+
+      Word word = Word.find(Integer.parseInt(request.queryParams("wordId")));
+      ArrayList<Definition> definitions = word.getDefinitions();
+
+      if (definitions == null) {
+        definitions = new ArrayList<Definition>();
+        request.session().attribute("definitions", definitions);
+      }
+
+      String definitionText = request.queryParams("definition");
+      Definition newDefinition = new Definition(definitionText);
+
+      definitions.add(newDefinition);
+      request.session().attribute("definitions", definitions);
+
+      model.put("word", word);
+      model.put("definitions", definitions);
+
+      model.put("template", "templates/word.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
 
 //*********************************************

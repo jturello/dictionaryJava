@@ -23,31 +23,48 @@ public class AppTest extends FluentTest {
     @Test
     public void rootTest() {
         goTo("http://localhost:4567/");
-        assertThat(pageSource()).contains("Dictionary");
+        assertThat(pageSource()).contains("Word List");
     }
 
     @Test
     public void wordIsCreatedTest() {
       goTo("http://localhost:4567/");
       click("a", withText("Add a new word"));
-      fill("#newWord").with("testword");
+      fill("#word").with("testword");
       submit(".btn");
-      assertThat(pageSource()).contains("Your word has been saved");
+      assertThat(pageSource()).contains("testword");
     }
 
     @Test
-    public void definitionIsDisplayedTest() {
-      goTo("http://localhost:4567/words:id/definitions/new");
-      fill("#definition").with("This is the description");
+    public void multipleWordsAreDisplayed_Test() {
+      goTo("http://localhost:4567/words/new");
+      fill("#word").with("firstWord");
       submit(".btn");
-      click("a", withText("View words"));
-      assertThat(pageSource()).contains("This is the description");
+      goTo("http://localhost:4567/words/new");
+      fill("#word").with("secondWord");
+      submit(".btn");
+      assertThat(pageSource()).contains("firstWord");
+      assertThat(pageSource()).contains("secondWord");
       }
 
-      @Test
-      public void wordDefinitionFormIsDisplayed() {
-      goTo("http://localhost:4567/tasks/new");
-      }
+
+    @Test
+    public void wordDefinitionFormIsDisplayed() {
+    goTo("http://localhost:4567/tasks/new");
+    }
+
+
+  } //end of Fluent
+    // @Test
+    // public void definitionIsDisplayedTest() {
+    //   goTo("http://localhost:4567/words:id/definitions/new");
+    //   fill("#definition").with("This is the definition");
+    //   submit(".btn");
+    //   click("a", withText("View words"));
+    //   assertThat(pageSource()).contains("This is the description");
+    //   }
+
+
 
     // @Test
     // public void taskNotAddedWhenDescriptionBlank_true() {
@@ -98,5 +115,3 @@ public class AppTest extends FluentTest {
     //   goTo("http://localhost:4567/tasks/999");
     //   assertThat(pageSource()).contains("Task not found");
     // }
-
-  } //end of Fluent

@@ -46,6 +46,7 @@ public class WordTest {
   public void addDefinition_addsDefinitionsToWord_true() {
     Word myWord = new Word("newWord");
     myWord.addDefinition("This is newWord's first definition");
+    assertEquals("This is newWord's first definition", myWord.getDefinitions().get(0).getText());
   }
 
   @Test
