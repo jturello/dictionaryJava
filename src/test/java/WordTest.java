@@ -62,31 +62,4 @@ public class WordTest {
     assertEquals(Word.all().size(), myWord.getId());
   }
 
-  // @Test
-  // public void find_returnsDefinitionWithSameId_secondDefinition() {
-  //   Definition firstDefinition = new Definition("Definition one");
-  //   Definition secondDefinition = new Definition("Definition two");
-  //   assertEquals(Definition.find(secondDefinition.getId()), secondDefinition);
-  // }
-
-  // @Test
-  // public void getId_WordsInstantiatedWithAnID_true() {
-  //   Word myWord = new Word("Mow the lawn");
-  //   assertEquals(Word.all().size(), myWord.getId());
-  // }
-  //
-  // @Test
-  // public void find_returnsWordWithSameId_secondWord() {
-  //   Word firstWord = new Word("Mow the lawn");
-  //   Word secondWord = new Word("Buy groceries");
-  //   assertEquals(Word.find(secondWord.getId()), secondWord);
-  // }
-  //
-  // @Test
-  // public void find_returnsNullWhenNoWordFound_true() {
-  //   assertTrue(Word.find(999) == null);
-  // }
-  //
-
-
 }
