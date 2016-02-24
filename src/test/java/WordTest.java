@@ -34,7 +34,6 @@ public class WordTest {
     assertTrue(Word.all().contains(secondWord));
   }
 
-
   @Test
   public void clear_emptiesAllWordsFromArrayList() {
     Word myWord = new Word("Elemental");

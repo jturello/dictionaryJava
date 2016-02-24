@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-
 public class Definition {
   private static ArrayList<Definition> instances = new ArrayList<Definition>();
 
@@ -36,5 +35,4 @@ public class Definition {
   public static void clear() {
     instances.clear();
   }
-
 }

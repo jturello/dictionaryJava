@@ -112,11 +112,8 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-
     post("/definitions", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-
-      // model.put("definition", Definition.find(Integer.parseInt("definition")));
 
       Word word = Word.find(Integer.parseInt(request.queryParams("wordId")));
       ArrayList<Definition> definitions = word.getDefinitions();
@@ -138,10 +135,6 @@ public class App {
       model.put("template", "templates/word.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-
-
-//*********************************************
-
 
   } // END OF MAIN
 
